@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".LogIn.LogIn">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <EditText
+            android:id="@+id/email_reg"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Email"
+            android:layout_marginTop="15dp"
+            android:textColorHint="#B6B7B7"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/name_reg"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:hint="Name"
+
+            android:inputType="numberPassword"
+            android:textColorHint="#B6B7B7"
+            android:textSize="14sp" />
+        <EditText
+            android:id="@+id/location_reg"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Location"
+            android:layout_marginTop="15dp"
+
+            android:textColorHint="#B6B7B7"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/password_reg"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:hint="Password"
+            android:inputType="numberPassword"
+            android:textColorHint="#B6B7B7"
+            android:textSize="14sp" />
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="230dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:text="Registratiom"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>
