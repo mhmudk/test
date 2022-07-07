@@ -5,5 +5,4 @@ data class ReqisterRequest (
     var name : String,
     var phone : String,
     var password : String,
-) {
-}
+)
