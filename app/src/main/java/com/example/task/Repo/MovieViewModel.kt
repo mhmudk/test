@@ -14,10 +14,13 @@ class MovieViewModel : ViewModel() {
     val mutabl = MutableLiveData<Movie>()
     val movieObj = RepoMovies()
 
-    fun getMoviesFromRemote(){
-
-      mutabl.postValue(movieObj.getMovies())
-
+//    fun getMoviesFromRemote(){
+//   mutabl.postValue(        movieObj.getMovies())
+//
+//
+//    }
+    fun getMoviesFromRemot():MutableLiveData<Movie>{
+     return    movieObj.getMovies()
     }
 
 
