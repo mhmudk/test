@@ -16,7 +16,7 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     val viewMoviemodel = MovieViewModel()
-    private val myAdapter: Adapter by lazy { Adapter() }
+   // private val myAdapter: Adapter by lazy { Adapter() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

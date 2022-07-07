@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+
 import com.example.task.Pojo.Movie
 import com.example.task.R
 
@@ -39,8 +39,8 @@ var img:ImageView = itemView.findViewById(R.id.img_movie)
 var titel:TextView = itemView.findViewById(R.id.title_id)
 var overView:TextView = itemView.findViewById(R.id.overview_id)
         fun setId(data:Movie){
-            Glide.with().load(data.).into(imageView);
-            titel.text= data.results.get().title
+//            Glide.with().load(data.).into(imageView);
+//            titel.text= data.results.get().title
         }
     }
 

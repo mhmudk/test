@@ -16,13 +16,13 @@ class RepoMovies : MovieInterface {
         val call = interBuilder.getMove()
         call.enqueue(object : Callback<Movie> {
             override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-      
-             if(response==null){
-             }else{
-                 mutabl.postValue(response.body())
-             }
+      if(response.isSuccessful){
+
+          mutabl.postValue(response.body())
+      }
             }
             override fun onFailure(call: Call<Movie>, t: Throwable) {
+
             }
         })
         return mutabl

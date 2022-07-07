@@ -30,16 +30,16 @@
             android:layout_marginTop="15dp"
             android:hint="Name"
 
-            android:inputType="numberPassword"
+            android:inputType="text"
             android:textColorHint="#B6B7B7"
             android:textSize="14sp" />
         <EditText
-            android:id="@+id/location_reg"
+            android:id="@+id/phone_reg"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:hint="Location"
+            android:hint="Phone"
             android:layout_marginTop="15dp"
-
+android:inputType="number"
             android:textColorHint="#B6B7B7"
             android:textSize="14sp" />
 
