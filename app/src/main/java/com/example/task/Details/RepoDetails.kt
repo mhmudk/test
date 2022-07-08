@@ -2,8 +2,8 @@ package com.example.task.Details
 
 import androidx.lifecycle.MutableLiveData
 import com.example.task.Pojo.MovieDetails
-import com.example.task.Retrof.Apis.ApiInterFace
-import com.example.task.Retrof.Builder.Builder
+import com.example.task.Retrofit.Apis.ApiInterFace
+import com.example.task.Retrofit.Builder.Builder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

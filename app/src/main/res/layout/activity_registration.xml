@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".LogIn.LogIn">
+    tools:context=".LogInActivity.LogIn">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,15 +33,7 @@
             android:inputType="text"
             android:textColorHint="#B6B7B7"
             android:textSize="14sp" />
-        <EditText
-            android:id="@+id/phone_reg"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:hint="Phone"
-            android:layout_marginTop="15dp"
-android:inputType="number"
-            android:textColorHint="#B6B7B7"
-            android:textSize="14sp" />
+
 
         <EditText
             android:id="@+id/password_reg"

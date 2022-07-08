@@ -21,9 +21,6 @@
             android:exported="false" />
         <activity
             android:name=".SplachScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Registration.Registration"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +29,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LogIn.LogIn"
-            android:exported="true" />
+            android:name=".RegisterActivity.Registration"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".LogInActivity.LogIn"
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
