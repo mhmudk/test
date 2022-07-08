@@ -1,4 +1,4 @@
-package com.example.task
+package com.example.task.Pojo
 
 object Const {
      const val BASE_URL = "https://api.themoviedb.org/3/"

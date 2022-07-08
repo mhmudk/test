@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import com.example.task.LoginRetrofit.ApiClient
+import com.example.task.Retrof.Builder.BuilderApiClient
 import com.example.task.LoginRetrofit.LogInRequest.LogInRequest
 import com.example.task.databinding.ActivityLogInBinding
 import retrofit2.Call
@@ -36,7 +36,7 @@ class LogIn : AppCompatActivity() {
     }
 
     fun logInRequestUser(loginrequest: LogInRequest) {
-        val loginrequestCall: Call<LogInRequest> = ApiClient().getService().logInUser(loginrequest)
+        val loginrequestCall: Call<LogInRequest> = BuilderApiClient().getService().logInUser(loginrequest)
         loginrequestCall.enqueue(object : Callback<LogInRequest> {
 
             override fun onResponse(

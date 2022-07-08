@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import com.example.task.LoginRetrofit.ApiClient
+import com.example.task.Retrof.Builder.BuilderApiClient
 
-import com.example.task.LoginRetrofit.ReqisterRequest.RegisterResponse
-import com.example.task.LoginRetrofit.ReqisterRequest.ReqisterRequest
 import com.example.task.LoginRetrofit.ReqisterRequest.newregister.ModelRegisterResponseRemote
 import com.example.task.databinding.ActivityRegistrationBinding
 
@@ -36,15 +34,6 @@ class Registration : AppCompatActivity() {
                 map["email"] = binding.emailReg.text.toString()
                 map["name"] = binding.nameReg.text.toString()
                 map["password"] = binding.passwordReg.text.toString()
-
-
-                var registerRequest: ReqisterRequest = ReqisterRequest(
-                    binding.emailReg.text.toString(),
-                    binding.nameReg.text.toString(),
-                    binding.phoneReg.text.toString(),
-                    binding.passwordReg.text.toString(),
-
-                    )
                 register(map)
             }
 
@@ -54,7 +43,7 @@ class Registration : AppCompatActivity() {
 
     fun register(map: HashMap<String, String?>) {
         var registerResponseCall: Call<ModelRegisterResponseRemote> =
-            ApiClient().getService().RegisterUser(map)
+            BuilderApiClient().getService().RegisterUser(map)
         registerResponseCall.enqueue(object : Callback<ModelRegisterResponseRemote> {
             override fun onFailure(call: Call<ModelRegisterResponseRemote>?, t: Throwable?) {
                 Log.d("Error", t.toString())
@@ -66,6 +55,7 @@ class Registration : AppCompatActivity() {
             ) {
               var data=  response?.body()
                 Toast.makeText(applicationContext, "Successfully ${data?.data?.name}", Toast.LENGTH_LONG).show()
+
             }
 
         })
