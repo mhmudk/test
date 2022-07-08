@@ -18,12 +18,12 @@ class SplachScreen : AppCompatActivity() {
         val preferences: SharedPreferences =
             applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)
         val retrivedToken = preferences.getString("TOKEN", null)
-        Log.d("Token",retrivedToken.toString())
+        Log.d("Token", retrivedToken.toString())
         if (retrivedToken != null) {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
 
-        }else{
-            startActivity(Intent(this,Registration::class.java))
+        } else {
+            startActivity(Intent(this, Registration::class.java))
         }
     }
 }

@@ -13,4 +13,4 @@ data class Result(
     val poster_path: String,
     val title: String,
 
-)
+    )

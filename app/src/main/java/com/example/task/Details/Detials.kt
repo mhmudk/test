@@ -18,8 +18,8 @@ class Detials : AppCompatActivity() {
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val catId = intent.getIntExtra("postion",78)
-        movieDetalmodel.getMovied(catId).observe(this) {
+        val catId = intent.getIntExtra("postion", 78)
+        movieDetalmodel.getMoviedByID(catId).observe(this) {
             binding.titleDetails.text = it.title
             binding.descriptionDetails.text = it.overview
             Glide.with(applicationContext)

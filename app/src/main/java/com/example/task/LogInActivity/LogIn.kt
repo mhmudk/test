@@ -22,7 +22,7 @@ import retrofit2.Response
 class LogIn : AppCompatActivity() {
     private lateinit var binding: ActivityLogInBinding
     private val map = HashMap<String, String?>()
-    var loginViewModel = LoginViewModel()
+    val loginViewModel = LoginViewModel()
     var pressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +30,10 @@ class LogIn : AppCompatActivity() {
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        onClick()
+    }
+
+    fun onClick() {
         binding.loginButton.setOnClickListener {
             if (TextUtils.isEmpty(binding.emailLogin.text.toString()) || TextUtils.isEmpty(binding.passwordLogin.text.toString())) {
                 Toast.makeText(applicationContext, "Please Fields required", Toast.LENGTH_LONG)
@@ -51,46 +55,10 @@ class LogIn : AppCompatActivity() {
         }
     }
 
-    /*
-
-     */
-    fun logInRequestUser(loginrequest: HashMap<String, String?>) {
-        val loginrequestCall: Call<LogInRequest> =
-            BuilderApiClient().getService().logInUser(loginrequest)
-        loginrequestCall.enqueue(object : Callback<LogInRequest> {
-
-            override fun onResponse(
-                call: Call<LogInRequest>?,
-                response: Response<LogInRequest>?
-            ) {
-                if (response != null) {
-                    var data = response.body()
-
-                    val preferences: SharedPreferences =
-                        this@LogIn.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    preferences.edit().putString("TOKEN", data?.token).apply()
-
-
-
-                    Toast.makeText(applicationContext, "Successfully", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this@LogIn, MainActivity::class.java))
-                }
-            }
-
-            override fun onFailure(call: Call<LogInRequest>?, t: Throwable?) {
-                Log.d("Error", t.toString())
-            }
-
-
-        })
-
-    }
-
     override fun onBackPressed() {
-        if(pressed){
+        if (pressed) {
             super.onBackPressed();
-        }
-        else{
+        } else {
             return;
         }
     }

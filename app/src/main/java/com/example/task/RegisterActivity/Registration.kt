@@ -16,31 +16,35 @@ import com.example.task.databinding.ActivityRegistrationBinding
 class Registration : AppCompatActivity() {
     private lateinit var binding: ActivityRegistrationBinding
     private val map = HashMap<String, String?>()
-    var registerViewmodel = RegisterViewModel()
-    var pressed = false
+    val registerViewmodel = RegisterViewModel()
+    var ispressed = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.registerButton.setOnClickListener {
-            if (TextUtils.isEmpty(binding.emailReg.text.toString())
-                || TextUtils.isEmpty(binding.nameReg.text.toString())
-                || TextUtils.isEmpty(binding.passwordReg.text.toString())
-            ) {
-                if(!Patterns.EMAIL_ADDRESS.matcher(binding.emailReg.text.toString()).matches())
-                Toast.makeText(applicationContext, "Email is Invalid", Toast.LENGTH_LONG)
-                    .show()
+        onClick()
 
-            } else {
+    }
+
+    fun onClick() {
+        binding.registerButton.setOnClickListener {
+            if (TextUtils.isEmpty(binding.emailReg.text.toString()) && !Patterns.EMAIL_ADDRESS.matcher(binding.emailReg.text.toString()).matches()) {
+                Toast.makeText(applicationContext, "Email is Invalid  ", Toast.LENGTH_LONG).show()
+            }else if (TextUtils.isEmpty(binding.nameReg.text)) {
+                Toast.makeText(applicationContext, "Name is Empty  ", Toast.LENGTH_LONG).show()
+            } else if (TextUtils.isEmpty(binding.passwordReg.text)){
+                Toast.makeText(applicationContext, "Password  is Empty  ", Toast.LENGTH_LONG).show()
+                }
+             else {
                 map["email"] = binding.emailReg.text.toString()
                 map["name"] = binding.nameReg.text.toString()
                 map["password"] = binding.passwordReg.text.toString()
 
                 registerViewmodel.getResponseUser(map).observe(this) {
-                  if(it.token.isEmpty()){
-                      Toast.makeText(applicationContext, "Failed  ", Toast.LENGTH_LONG).show()
+                    if (it.token.isEmpty()) {
+                        Toast.makeText(applicationContext, "Failed  ", Toast.LENGTH_LONG).show()
 
-                  }
+                    }
                     var data = it.token
                     val preferences: SharedPreferences =
                         applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)
@@ -49,16 +53,15 @@ class Registration : AppCompatActivity() {
                     startActivity(Intent(applicationContext, LogIn::class.java))
                 }
             }
-
+            }
 
         }
-    }
+
 
     override fun onBackPressed() {
-        if(pressed){
+        if (ispressed) {
             super.onBackPressed();
-        }
-        else{
+        } else {
             return;
         }
     }

@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 
-class LoginViewModel:ViewModel(){
-   val repo = RepoLoginUser()
-    fun getResponseUser(loginrequest: HashMap<String, String?>):MutableLiveData<LogInRequest>{
+class LoginViewModel : ViewModel() {
+    val repo = LoginUserRepo()
+    fun getResponseUser(loginrequest: HashMap<String, String?>): MutableLiveData<LogInRequest> {
         return repo.logInRequestUser(loginrequest)
     }
 

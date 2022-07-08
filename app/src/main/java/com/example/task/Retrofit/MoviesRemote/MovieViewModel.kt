@@ -5,12 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.example.task.Pojo.Movie
 
 class MovieViewModel : ViewModel() {
-
-    val movieObj = RepoMovies()
-
-
-    fun getMoviesFromRemot():MutableLiveData<Movie>{
-     return    movieObj.getMovies()
+    val movieObj = MoviesRepo()
+    fun getMoviesFromRemot(): MutableLiveData<Movie> {
+        return movieObj.getMovies()
     }
 
 

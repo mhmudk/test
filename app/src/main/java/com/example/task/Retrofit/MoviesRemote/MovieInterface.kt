@@ -7,5 +7,4 @@ interface MovieInterface {
     fun getMovies(): MutableLiveData<Movie>
 
 
-
 }

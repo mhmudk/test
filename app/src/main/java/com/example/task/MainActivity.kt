@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity() {
         myAdapter.setList(listmovie)
         binding.recMain.adapter = myAdapter
     }
+
     override fun onBackPressed() {
-        if(pressed){
+        if (pressed) {
             super.onBackPressed();
-        }
-        else{
+        } else {
             return;
         }
     }

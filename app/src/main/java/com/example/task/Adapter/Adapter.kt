@@ -21,7 +21,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
     }
 
     interface SentDetails {
-        fun onItemClick(postion: Int  )
+        fun onItemClick(postion: Int)
     }
 
     fun setOnItemClick(item: SentDetails) {
@@ -33,6 +33,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
             .inflate(R.layout.list_movies, parent, false)
         return ViewHolder(view, onItemListner)
     }
+
     override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
         val data: Result = movieslist[position]
         holder.setId(data)
@@ -42,7 +43,8 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         return movieslist.size
     }
 
-    inner class ViewHolder(itemView: View, itemlistner: SentDetails) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, itemlistner: SentDetails) :
+        RecyclerView.ViewHolder(itemView) {
         var img: ImageView = itemView.findViewById(R.id.img_movie)
         var titel: TextView = itemView.findViewById(R.id.title_id)
         var overView: TextView = itemView.findViewById(R.id.overview_id)

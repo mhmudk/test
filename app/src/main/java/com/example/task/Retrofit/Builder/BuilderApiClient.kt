@@ -22,6 +22,7 @@ class BuilderApiClient {
             .build()
         return retrofit
     }
+
     fun getService(): UsreService {
         val userServise: UsreService = getRetrofit().create(UsreService::class.java)
         return userServise
