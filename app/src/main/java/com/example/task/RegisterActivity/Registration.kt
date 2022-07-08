@@ -3,25 +3,21 @@ package com.example.task.RegisterActivity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.task.LogInActivity.LogIn
-import com.example.task.Retrofit.Builder.BuilderApiClient
-
-import com.example.task.Retrofit.RegisterUser.ModelRegisterResponseRemote
+import com.example.task.Retrofit.RegisterUser.RegisterViewModel
 import com.example.task.databinding.ActivityRegistrationBinding
-
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class Registration : AppCompatActivity() {
     private lateinit var binding: ActivityRegistrationBinding
     private val map = HashMap<String, String?>()
+    var registerViewmodel = RegisterViewModel()
+    var pressed = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
@@ -31,43 +27,40 @@ class Registration : AppCompatActivity() {
                 || TextUtils.isEmpty(binding.nameReg.text.toString())
                 || TextUtils.isEmpty(binding.passwordReg.text.toString())
             ) {
-                Toast.makeText(applicationContext, "Please Fields required", Toast.LENGTH_LONG)
+                if(!Patterns.EMAIL_ADDRESS.matcher(binding.emailReg.text.toString()).matches())
+                Toast.makeText(applicationContext, "Email is Invalid", Toast.LENGTH_LONG)
                     .show()
 
             } else {
                 map["email"] = binding.emailReg.text.toString()
                 map["name"] = binding.nameReg.text.toString()
                 map["password"] = binding.passwordReg.text.toString()
-                register(map)
+
+                registerViewmodel.getResponseUser(map).observe(this) {
+                  if(it.token.isEmpty()){
+                      Toast.makeText(applicationContext, "Failed  ", Toast.LENGTH_LONG).show()
+
+                  }
+                    var data = it.token
+                    val preferences: SharedPreferences =
+                        applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    preferences.edit().putString("TOKEN", data).apply()
+                    Toast.makeText(applicationContext, "Successfully ", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(applicationContext, LogIn::class.java))
+                }
             }
 
 
         }
     }
 
-    fun register(map: HashMap<String, String?>) {
-        var registerResponseCall: Call<ModelRegisterResponseRemote> =
-            BuilderApiClient().getService().RegisterUser(map)
-        registerResponseCall.enqueue(object : Callback<ModelRegisterResponseRemote> {
-            override fun onFailure(call: Call<ModelRegisterResponseRemote>?, t: Throwable?) {
-                Log.d("Error", t.toString())
-            }
-
-            override fun onResponse(
-                call: Call<ModelRegisterResponseRemote>?,
-                response: Response<ModelRegisterResponseRemote>?
-            ) {
-              var data=  response?.body()
-                val preferences: SharedPreferences =
-                    this@Registration.getSharedPreferences("token", Context.MODE_PRIVATE)
-                preferences.edit().putString("TOKEN", data?.token).apply()
-
-                Toast.makeText(applicationContext, "Successfully ${data?.data?.name}", Toast.LENGTH_LONG).show()
-                startActivity(Intent(this@Registration, LogIn::class.java))
-            }
-
-        })
-
-
+    override fun onBackPressed() {
+        if(pressed){
+            super.onBackPressed();
+        }
+        else{
+            return;
+        }
     }
+
 }

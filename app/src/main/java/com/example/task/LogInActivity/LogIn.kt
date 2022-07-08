@@ -1,5 +1,6 @@
 package com.example.task.LogInActivity
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -21,7 +22,8 @@ import retrofit2.Response
 class LogIn : AppCompatActivity() {
     private lateinit var binding: ActivityLogInBinding
     private val map = HashMap<String, String?>()
-var loginViewModel=LoginViewModel()
+    var loginViewModel = LoginViewModel()
+    var pressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +38,22 @@ var loginViewModel=LoginViewModel()
             } else {
                 map["email"] = binding.emailLogin.text.toString()
                 map["password"] = binding.passwordLogin.text.toString()
-                logInRequestUser(map)
-         //       loginViewModel.getResponseUser(map).observe()
+                loginViewModel.getResponseUser(map).observe(this) {
+                    val preferences: SharedPreferences =
+                        applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    preferences.edit().putString("TOKEN", it.token).apply()
+                    Toast.makeText(applicationContext, "Login Successful", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
+
+                }
             }
 
         }
     }
-/*
 
- */
+    /*
+
+     */
     fun logInRequestUser(loginrequest: HashMap<String, String?>) {
         val loginrequestCall: Call<LogInRequest> =
             BuilderApiClient().getService().logInUser(loginrequest)
@@ -75,5 +84,14 @@ var loginViewModel=LoginViewModel()
 
         })
 
+    }
+
+    override fun onBackPressed() {
+        if(pressed){
+            super.onBackPressed();
+        }
+        else{
+            return;
+        }
     }
 }

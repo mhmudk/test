@@ -18,20 +18,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val viewMoviemodel = MovieViewModel()
     private val myAdapter by lazy { Adapter() }
+    var pressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewMoviemodel.getMoviesFromRemot().observe(this) {
-         Log.d("Data",it.results.get(0).title)
             sentDataToAdapter(it.results)
         }
         myAdapter.setOnItemClick(object : Adapter.SentDetails {
 
             override fun onItemClick(posti: Int) {
                 val intent = Intent(applicationContext, Detials::class.java)
-                Log.d(TAG, "onItemClick: $posti")
                 intent.putExtra("postion", posti)
                 startActivity(intent)
             }
@@ -42,6 +41,14 @@ class MainActivity : AppCompatActivity() {
     fun sentDataToAdapter(listmovie: List<Result>) {
         myAdapter.setList(listmovie)
         binding.recMain.adapter = myAdapter
+    }
+    override fun onBackPressed() {
+        if(pressed){
+            super.onBackPressed();
+        }
+        else{
+            return;
+        }
     }
 
 
