@@ -9,8 +9,10 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.task.LogInActivity.LogIn
+import com.example.task.Pojo.Const
 import com.example.task.Retrofit.RegisterUser.RegisterViewModel
 import com.example.task.databinding.ActivityRegistrationBinding
+import com.example.task.showToast
 
 
 class Registration : AppCompatActivity() {
@@ -28,35 +30,57 @@ class Registration : AppCompatActivity() {
 
     fun onClick() {
         binding.registerButton.setOnClickListener {
-            if (TextUtils.isEmpty(binding.emailReg.text.toString()) && !Patterns.EMAIL_ADDRESS.matcher(binding.emailReg.text.toString()).matches()) {
-                Toast.makeText(applicationContext, "Email is Invalid  ", Toast.LENGTH_LONG).show()
-            }else if (TextUtils.isEmpty(binding.nameReg.text)) {
-                Toast.makeText(applicationContext, "Name is Empty  ", Toast.LENGTH_LONG).show()
-            } else if (TextUtils.isEmpty(binding.passwordReg.text)){
-                Toast.makeText(applicationContext, "Password  is Empty  ", Toast.LENGTH_LONG).show()
+            binding.apply {
+                val email = emailReg.text.toString()
+                val password = passwordReg.text.toString()
+                val name = nameReg.text.toString()
+                if (email.isBlank()) {
+                    emailReg.error = "IsEmpty"
+                    showToast(applicationContext, "Email is Empty  ")
                 }
-             else {
-                map["email"] = binding.emailReg.text.toString()
-                map["name"] = binding.nameReg.text.toString()
-                map["password"] = binding.passwordReg.text.toString()
-
-                registerViewmodel.getResponseUser(map).observe(this) {
-                    if (it.token.isEmpty()) {
-                        Toast.makeText(applicationContext, "Failed  ", Toast.LENGTH_LONG).show()
-
-                    }
-                    var data = it.token
-                    val preferences: SharedPreferences =
-                        applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    preferences.edit().putString("TOKEN", data).apply()
-                    Toast.makeText(applicationContext, "Successfully ", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(applicationContext, LogIn::class.java))
+                if (name.isBlank()) {
+                    nameReg.error = "IsEmpty"
+                    showToast(applicationContext, "Name is Empty  ")
                 }
-            }
+                if (password.isBlank()) {
+                    passwordReg.error = "IsEmpty"
+                    showToast(applicationContext, "Password  is Empty  ")
+
+                }
+                if (email.isNotBlank() && !Patterns.EMAIL_ADDRESS.matcher(binding.emailReg.text.toString())
+                        .matches()
+                ) {
+                    showToast(applicationContext, "Email is Invalid  ")
+
+                } else {
+                    observer()
+                }
             }
 
         }
 
+    }
+
+    fun observer() {
+        binding.apply {
+            map["email"] = emailReg.text.toString()
+            map["name"] = nameReg.text.toString()
+            map["password"] = passwordReg.text.toString()
+
+            registerViewmodel.getResponseUser(map).observe(this@Registration) {
+                if (it.token.isEmpty()) {
+                    showToast(baseContext, "Failed")
+
+                }
+                var data = it.token
+                val preferences: SharedPreferences =
+                    applicationContext.getSharedPreferences("token", Context.MODE_PRIVATE)
+                preferences.edit().putString(Const.TOKEN, data).apply()
+                showToast(applicationContext, "Successfully ")
+                startActivity(Intent(applicationContext, LogIn::class.java))
+            }
+        }
+    }
 
     override fun onBackPressed() {
         if (ispressed) {

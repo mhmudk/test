@@ -50,7 +50,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
-            android:text="Registratiom"
+            android:text="Registration"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16sp" />
