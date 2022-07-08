@@ -1,9 +1,9 @@
-package com.example.task.Repo
+package com.example.task.Retrof.MoviesRemote
 
 import androidx.lifecycle.MutableLiveData
 import com.example.task.Pojo.Movie
-import com.example.task.Retrofit.ApiInterFace
-import com.example.task.Retrofit.Builder
+import com.example.task.Retrof.Apis.ApiInterFace
+import com.example.task.Retrof.Builder.Builder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.example.task.Retrofit
+package com.example.task.Retrof.Apis
 
 import com.example.task.Pojo.Movie
 import com.example.task.Pojo.MovieDetails

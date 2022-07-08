@@ -1,6 +1,6 @@
-package com.example.task.Retrofit
+package com.example.task.Retrof.Builder
 
-import com.example.task.Const
+import com.example.task.Pojo.Const
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

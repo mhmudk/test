@@ -1,13 +1,10 @@
 package com.example.task.Details
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.task.Adapter.Adapter
-import com.example.task.Const
-import com.example.task.Pojo.Result
+import com.example.task.Pojo.Const
 import com.example.task.databinding.ActivityMovieDetailsBinding
 
 class Detials : AppCompatActivity() {

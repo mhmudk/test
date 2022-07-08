@@ -1,14 +1,9 @@
-package com.example.task.Repo
+package com.example.task.Retrof.MoviesRemote
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.task.Pojo.Movie
-import com.example.task.Retrofit.ApiInterFace
-import com.example.task.Retrofit.Builder
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.task.Retrof.MoviesRemote.RepoMovies
 
 class MovieViewModel : ViewModel() {
 

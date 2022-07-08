@@ -9,7 +9,7 @@ import android.util.Log
 import com.example.task.Adapter.Adapter
 import com.example.task.Details.Detials
 import com.example.task.Pojo.Result
-import com.example.task.Repo.MovieViewModel
+import com.example.task.Retrof.MoviesRemote.MovieViewModel
 
 import com.example.task.databinding.ActivityMainBinding
 

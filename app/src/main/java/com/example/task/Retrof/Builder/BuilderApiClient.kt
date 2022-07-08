@@ -1,12 +1,13 @@
-package com.example.task.LoginRetrofit
+package com.example.task.Retrof.Builder
 
-import com.example.task.Const
+import com.example.task.LoginRetrofit.UsreService
+import com.example.task.Pojo.Const
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiClient {
+class BuilderApiClient {
 
     fun getRetrofit(): Retrofit {
         val httpInterceptor = HttpLoggingInterceptor()
@@ -15,12 +16,13 @@ class ApiClient {
         var okHttpClient: OkHttpClient =
             OkHttpClient.Builder().addInterceptor(httpInterceptor).build()
         val retrofit = Retrofit.Builder()
-            .baseUrl(Const.LOGIN_BASE_URL)
+            .baseUrl(Const.LAZY_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
             .build()
         return retrofit
     }
-    fun getService():UsreService{
+    fun getService(): UsreService {
         val userServise: UsreService = getRetrofit().create(UsreService::class.java)
         return userServise
     }
